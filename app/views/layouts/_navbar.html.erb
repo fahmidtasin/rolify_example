@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+  <a class="navbar-brand" href="/">Rolify</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto"> <!-- Use "mr-auto" to push items to the left -->
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users">Manage</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav custom-mx"> <!-- Use "ml-auto" to push items to the right -->
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= form_tag(destroy_user_session_path, method: :delete) do %>
+            <%= submit_tag("Sign Out",class:"btn btn-sm btn-danger") %>
+          <% end %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/sign_in">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/sign_up">Signup</a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+<style>
+    .navbar-nav.custom-mx {
+        margin-left: auto; /* Adjust the margin as needed */
+    }
+</style>
