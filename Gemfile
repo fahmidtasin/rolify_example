@@ -79,3 +79,5 @@ gem "devise", "~> 4.9"
 gem "faker", "~> 3.2"
 
 gem "rolify", "~> 6.0"
+
+gem "cancancan", "~> 3.5"

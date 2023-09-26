@@ -1,7 +1,37 @@
-<%= form_with(model: @user) do |form| %>
-  <%= form.collection_check_boxes :role_ids, Role.all, :id, :name %>
-  <%= @user.errors[:roles] %>
-  <%= form.button :submit %>
+<table class="table table-bordered table-hover table-bordered">
+  <thead class="bg-dark text-white">
+  <tr>
+    <th>Role</th>
+    <th>Checkbox</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%= form_with(model: @user, html: { class: "form-horizontal" }) do |form| %>
+    <% Role.all.each do |role| %>
+      <tr>
+        <td><%= role.name %></td>
+        <td>
+          <%= form.check_box :role_ids, { multiple: true }, role.id, nil %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
 
-  <%= link_to "Back", users_path %>
-<% end %>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= form.button :submit, class: "btn btn-primary" %>
+        <%= link_to "Back", users_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <% if @user.errors[:role_ids].any? %>
+          <div class="text-danger">
+            <%= @user.errors[:role_ids].first %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>

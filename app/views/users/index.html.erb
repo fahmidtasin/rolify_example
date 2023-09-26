@@ -1,6 +1,22 @@
-<% @users.each do |user| %>
-  <%= user.email %>
-  <%= user.roles.pluck(:name) %>
-  <%= link_to "Edit Roles", edit_user_path(user) %>
-  <br>
-<% end %>
+
+
+  <table class="table table-hover table-stripped table-bordered">
+    <thead class="bg-dark text-white">
+      <tr>
+        <th>#</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @users.each_with_index do |user,i| %>
+      <tr>
+        <td><%= i+1 %></td>
+        <td><strong><%= user.email %></strong></td>
+        <td><%= user.roles.pluck(:name) %></td>
+        <td><%= link_to "Edit Roles", edit_user_path(user) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>

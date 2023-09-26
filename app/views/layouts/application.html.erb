@@ -16,8 +16,9 @@
 
   <%= render "layouts/navbar" %>
   <% if user_signed_in? %>
+    <p class="text-center">Logged in as: <%= current_user.email %></p>
     <% if current_user.has_any_role? %>
-      <p class="text-end">Member Type: <%= current_user.roles.pluck(:name).map(&:titleize).join(', ') %></p>
+      <p class="text-center">Member Type: <%= current_user.roles.pluck(:name).map(&:titleize).join(', ') %></p>
     <% end %>
   <% end %>
   <div class="container">

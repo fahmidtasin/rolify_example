@@ -1,12 +1,15 @@
 class UsersController < ApplicationController
 
+  load_and_authorize_resource
   before_action :authenticate_user!
+  # before_action :check_admin_role, only: [:index, :edit, :update]
   def index
     @users = User.order(created_at: :asc)
   end
 
   def edit
     @user = User.find(params[:id])
+    authorize! :edit, @user
   end
 
   def update
@@ -27,4 +30,11 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit({ role_ids: [] })
   end
+
+  # def check_admin_role
+  #   unless current_user.has_role?(:admin)
+  #     redirect_to root_path, alert: "Unauthorized access. Only administrators can perform this action."
+  #   end
+  # end
+
 end
